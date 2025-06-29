@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IslamicLife.ai - تنظيم حياتك الإسلامية</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0d5e3f',
+                        secondary: '#d4af37',
+                        dark: '#0a2e1f',
+                    },
+                    fontFamily: {
+                        arabic: ['"Noto Sans Arabic"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans Arabic', sans-serif;
+            background-color: #f5f7fa;
+        }
+        
+        .prayer-card {
+            transition: all 0.3s ease;
+        }
+        
+        .prayer-card.active {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.5s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+        
+        .floating-btn {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- شريط التنقل -->
+    <nav class="bg-primary text-white shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-mosque text-2xl text-secondary"></i>
+                <span class="text-xl font-bold">IslamicLife.ai</span>
+            </div>
+            
+            <div class="hidden md:flex space-x-6">
+                <a href="#" class="hover:text-secondary transition">الرئيسية</a>
+                <a href="#" class="hover:text-secondary transition">الميزات</a>
+                <a href="#" class="hover:text-secondary transition">حولنا</a>
+                <a href="#" class="hover:text-secondary transition">التواصل</a>
+            </div>
+            
+            <div class="flex items-center space-x-3">
+                <button class="bg-secondary hover:bg-yellow-600 text-dark font-bold py-2 px-4 rounded-lg transition">
+                    تسجيل الدخول
+                </button>
+                <button class="md:hidden text-xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- القسم الرئيسي -->
+    <header class="bg-gradient-to-r from-dark to-primary text-white py-16">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4">
+                    منصة ذكية لتنظيم حياتك الإسلامية اليومية
+                </h1>
+                <p class="text-xl mb-8 opacity-90">
+                    باستخدام الذكاء الاصطناعي، نقدم لك تجربة إيمانية شخصية تساعدك على تنظيم يومك حسب أوقات الصلاة، الأهداف الدينية والمناسبات الإسلامية.
+                </p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <button class="bg-secondary hover:bg-yellow-600 text-dark font-bold py-3 px-6 rounded-lg text-lg transition">
+                        ابدأ الآن مجانًا
+                    </button>
+                    <button class="bg-white hover:bg-gray-200 text-primary font-bold py-3 px-6 rounded-lg text-lg transition">
+                        <i class="fas fa-play-circle mr-2"></i> شاهد الفيديو
+                    </button>
+                </div>
+            </div>
+            
+            <div class="md:w-1/2 flex justify-center">
+                <div class="relative">
+                    <div class="bg-white bg-opacity-20 backdrop-blur-lg rounded-3xl p-6 shadow-2xl w-80">
+                        <div class="text-center mb-6">
+                            <div class="text-secondary font-bold mb-2">اليوم</div>
+                            <div class="text-3xl font-bold">15 ذو القعدة 1444</div>
+                            <div class="opacity-80">29 مايو 2023</div>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="prayer-card bg-white bg-opacity-10 p-4 rounded-xl flex justify-between items-center">
+                                <div>
+                                    <div class="font-bold">الفجر</div>
+                                    <div class="opacity-80 text-sm">4:25 ص</div>
+                                </div>
+                                <div class="bg-secondary rounded-full p-2">
+                                    <i class="fas fa-moon text-dark"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="prayer-card active bg-secondary bg-opacity-20 p-4 rounded-xl flex justify-between items-center">
+                                <div>
+                                    <div class="font-bold">الظهر</div>
+                                    <div class="opacity-80 text-sm">12:15 م</div>
+                                </div>
+                                <div class="bg-secondary rounded-full p-2">
+                                    <i class="fas fa-sun text-dark"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="prayer-card bg-white bg-opacity-10 p-4 rounded-xl flex justify-between items-center">
+                                <div>
+                                    <div class="font-bold">العصر</div>
+                                    <div class="opacity-80 text-sm">3:45 م</div>
+                                </div>
+                                <div class="bg-secondary rounded-full p-2">
+                                    <i class="fas fa-cloud-sun text-dark"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 pt-4 border-t border-white border-opacity-20 text-center">
+                            <div class="text-sm opacity-80 mb-2">الصلاة القادمة: العصر</div>
+                            <div class="bg-primary rounded-full py-2 px-4 font-bold">02:15:43</div>
+                        </div>
+                    </div>
+                    
+                    <div class="absolute -top-6 -right-6 bg-white text-dark rounded-full p-4 shadow-lg">
+                        <i class="fas fa-location-dot text-xl text-primary"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- قسم الميزات -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">ميزاتنا الكاملة</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    اكتشف كيف يمكن لـ IslamicLife.ai تغيير طريقة ممارستك للإسلام في حياتك اليومية
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- الميزة 1 -->
+                <div class="bg-gray-50 rounded-xl p-6 shadow-lg border border-gray-100 hover:border-secondary transition">
+                    <div class="text-secondary text-4xl mb-4">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark mb-3">المخطط اليومي الذكي</h3>
+                    <p class="text-gray-600 mb-4">
+                        ينظم يومك حسب أوقات الصلاة، الحالة الجوية، الأهداف الدينية والمناسبات الإسلامية.
+                    </p>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>تنبيهات قبل الصلاة</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>جدول أذكار يومي</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>تتبع الأهداف الدينية</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- الميزة 2 -->
+                <div class="bg-gray-50 rounded-xl p-6 shadow-lg border border-gray-100 hover:border-secondary transition">
+                    <div class="text-secondary text-4xl mb-4">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark mb-3">المساعد الصوتي الإسلامي</h3>
+                    <p class="text-gray-600 mb-4">
+                        يرد على أسئلتك الشرعية والدينية بصوت طبيعي معتمد على فتاوى موثوقة.
+                    </p>
+                    <div class="mt-4 p-4 bg-primary bg-opacity-10 rounded-lg">
+                        <div class="flex items-start mb-3">
+                            <div class="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16" />
+                            <div class="mr-3">
+                                <div class="font-bold">سؤال:</div>
+                                <div class="bg-white p-3 rounded-lg shadow mt-2">ما حكم الصلاة بدون وضوء؟</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16" />
+                            <div class="mr-3">
+                                <div class="font-bold">جواب:</div>
+                                <div class="bg-secondary bg-opacity-20 p-3 rounded-lg shadow mt-2">الصلاة بغير وضوء باطلة لقوله صلى الله عليه وسلم: "لا يقبل الله صلاة أحدكم إذا أحدث حتى يتوضأ"</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- الميزة 3 -->
+                <div class="bg-gray-50 rounded-xl p-6 shadow-lg border border-gray-100 hover:border-secondary transition">
+                    <div class="text-secondary text-4xl mb-4">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark mb-3">الحاسبات الذكية</h3>
+                    <p class="text-gray-600 mb-4">
+                        مجموعة من الأدوات الحسابية الإسلامية لمساعدتك في تطبيق شعائر دينك.
+                    </p>
+                    <div class="mt-4">
+                        <div class="bg-white rounded-lg shadow overflow-hidden">
+                            <div class="bg-primary text-white p-3 font-bold">حاسبة الزكاة</div>
+                            <div class="p-4">
+                                <div class="mb-3">
+                                    <label class="block text-gray-700 mb-1">إجمالي ما تمتلكه (بالدولار)</label>
+                                    <input type="number" class="w-full p-2 border rounded-lg" value="10000">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="block text-gray-700 mb-1">نصاب الزكاة</label>
+                                    <div class="p-2 bg-gray-100 rounded-lg">5,950 دولار (85 جم ذهب)</div>
+                                </div>
+                                <div class="font-bold text-lg">
+                                    الزكاة الواجبة: <span class="text-primary">250 دولار</span>
+                                </div>
+                                <button class="mt-4 w-full bg-secondary hover:bg-yellow-600 text-dark font-bold py-2 px-4 rounded-lg transition">
+                                    احسب زكاتك الآن
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- الميزة 4 -->
+                <div class="bg-gray-50 rounded-xl p-6 shadow-lg border border-gray-100 hover:border-secondary transition">
+                    <div class="text-secondary text-4xl mb-4">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark mb-3">الدعم النفسي الإسلامي</h3>
+                    <p class="text-gray-600 mb-4">
+                        تمارين نفسية مدعومة بالقرآن والأذكار لتحسين صحتك النفسية والروحية.
+                    </p>
+                    <div class="mt-4">
+                        <div class="bg-gradient-to-r from-primary to-secondary p-1 rounded-lg">
+                            <div class="bg-white rounded-lg p-4">
+                                <div class="font-bold text-lg mb-2">تمرين التنفس مع الذكر</div>
+                                <div class="flex items-center justify-center space-x-4 my-6">
+                                    <div class="text-center">
+                                        <div class="bg-primary rounded-full w-16 h-16 flex items-center justify-center text-white text-xl">
+                                            شهيق
+                                        </div>
+                                        <div class="mt-2">(الله أكبر)</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="bg-secondary rounded-full w-16 h-16 flex items-center justify-center text-dark text-xl">
+                                            حبس
+                                        </div>
+                                        <div class="mt-2">(لا إله إلا الله)</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="bg-green-500 rounded-full w-16 h-16 flex items-center justify-center text-white text-xl">
+                                            زفير
+                                        </div>
+                                        <div class="mt-2">(أستغفر الله)</div>
+                                    </div>
+                                </div>
+                                <button class="w-full bg-primary hover:bg-dark text-white font-bold py-2 px-4 rounded-lg transition">
+                                    ابدأ التمرين الآن
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- الميزة 5 -->
+                <div class="bg-gray-50 rounded-xl p-6 shadow-lg border border-gray-100 hover:border-secondary transition">
+                    <div class="text-secondary text-4xl mb-4">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark mb-3">الاستشارات الفقهية</h3>
+                    <p class="text-gray-600 mb-4">
+                        إجابات فقهية موثقة مع ذكر المصادر والمراجع من القرآن والسنة.
+                    </p>
+                    <div class="mt-4 bg-white rounded-lg shadow p-4">
+                        <div class="font-bold mb-2">آخر الاستشارات</div>
+                        <div class="space-y-3">
+                            <div class="border-l-4 border-secondary pl-3 py-1">
+                                <div class="font-bold">ما هي مبطلات الصوم؟</div>
+                                <div class="text-sm text-gray-600">أجاب: الشيخ محمد العريفي</div>
+                            </div>
+                            <div class="border-l-4 border-primary pl-3 py-1">
+                                <div class="font-bold">كيفية حساب زكاة الأسهم؟</div>
+                                <div class="text-sm text-gray-600">أجاب: دار الإفتاء المصرية</div>
+                            </div>
+                            <div class="border-l-4 border-green-500 pl-3 py-1">
+                                <div class="font-bold">أحكام صلاة المسافر</div>
+                                <div class="text-sm text-gray-600">أجاب: الشيخ ابن عثيمين</div>
+                            </div>
+                        </div>
+                        <button class="mt-4 w-full border border-primary text-primary hover:bg-primary hover:text-white font-bold py-2 px-4 rounded-lg transition">
+                            اسأل سؤالك الآن
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- الميزة 6 -->
+                <div class="bg-gray-50 rounded-xl p-6 shadow-lg border border-gray-100 hover:border-secondary transition">
+                    <div class="text-secondary text-4xl mb-4">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark mb-3">التقارير والإحصائيات</h3>
+                    <p class="text-gray-600 mb-4">
+                        تتبع تقدمك الروحي واحصل على تقارير أسبوعية وشهرية عن نشاطك الديني.
+                    </p>
+                    <div class="mt-4">
+                        <div class="bg-white rounded-lg shadow p-4">
+                            <div class="flex justify-between items-center mb-4">
+                                <div class="font-bold">تقدمك الروحي هذا الأسبوع</div>
+                                <div class="text-primary font-bold">78%</div>
+                            </div>
+                            <div class="space-y-3">
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span>الصلوات</span>
+                                        <span>35/35</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                        <div class="bg-green-500 h-2.5 rounded-full" style="width: 100%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span>الأذكار</span>
+                                        <span>210/300</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                        <div class="bg-secondary h-2.5 rounded-full" style="width: 70%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span>قراءة القرآن</span>
+                                        <span>15/20 صفحة</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                        <div class="bg-primary h-2.5 rounded-full" style="width: 75%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="mt-4 w-full bg-dark hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-lg transition">
+                                عرض التقرير الكامل
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم ميزات رمضان -->
+    <section class="py-16 bg-gradient-to-r from-dark to-primary text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">ميزات خاصة برمضان</h2>
+                <p class="text-xl opacity-90 max-w-2xl mx-auto">
+                    استعد لرمضان مع مساعد شخصي متكامل يساعدك على استغلال الشهر الفضيل بأفضل طريقة
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white bg-opacity-10 backdrop-blur-lg rounded-xl p-6 border border-white border-opacity-20">
+                    <div class="text-5xl text-secondary mb-4">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">عداد السحور والإفطار</h3>
+                    <p class="opacity-90 mb-4">
+                        عدّاد تنازلي دقيق لمواعيد السحور والإفطار حسب موقعك الجغرافي.
+                    </p>
+                    <div class="mt-6 flex justify-around">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold">03</div>
+                            <div class="text-sm opacity-80">ساعات</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold">45</div>
+                            <div class="text-sm opacity-80">دقائق</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold">22</div>
+                            <div class="text-sm opacity-80">ثواني</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 backdrop-blur-lg rounded-xl p-6 border border-white border-opacity-20">
+                    <div class="text-5xl text-secondary mb-4">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">ختم القرآن</h3>
+                    <p class="opacity-90 mb-4">
+                        خطط لختم القرآن في رمضان مع جدول يومي حسب سرعة قراءتك.
+                    </p>
+                    <div class="mt-6">
+                        <div class="flex justify-between mb-2">
+                            <span>تقدمك في الختمة</span>
+                            <span>15%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5 bg-opacity-30">
+                            <div class="bg-secondary h-2.5 rounded-full" style="width: 15%"></div>
+                        </div>
+                        <div class="mt-4 text-center">
+                            <div class="font-bold">اليوم 4 من رمضان</div>
+                            <div class="opacity-80">الجزء 4 - سورة النساء</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 backdrop-blur-lg rounded-xl p-6 border border-white border-opacity-20">
+                    <div class="text-5xl text-secondary mb-4">
+                        <i class="fas fa-donate"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">زكاة الفطر</h3>
+                    <p class="opacity-90 mb-4">
+                        احسب زكاة الفطر وتبرع إلكترونيًا لمستحقيها حول العالم.
+                    </p>
+                    <div class="mt-6">
+                        <div class="mb-4">
+                            <label class="block opacity-80 mb-2">عدد أفراد الأسرة</label>
+                            <input type="number" class="w-full bg-white bg-opacity-20 text-white rounded-lg p-2" value="5">
+                        </div>
+                        <div class="font-bold text-xl">
+                            قيمة زكاة الفطر: <span class="text-secondary">75 ريال</span>
+                        </div>
+                        <button class="mt-4 w-full bg-secondary hover:bg-yellow-600 text-dark font-bold py-2 px-4 rounded-lg transition">
+                            تبرع الآن
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم التحميل -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">حمل التطبيق الآن</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto mb-10">
+                    استمتع بجميع ميزات IslamicLife.ai على هاتفك المحمول أينما كنت
+                </p>
+                
+                <div class="flex justify-center space-x-6">
+                    <a href="#" class="inline-block bg-dark hover:bg-gray-800 text-white font-bold py-3 px-6 rounded-lg transition flex items-center">
+                        <i class="fab fa-apple text-2xl mr-3"></i>
+                        <div class="text-left">
+                            <div class="text-xs">Download on the</div>
+                            <div class="text-xl">App Store</div>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="inline-block bg-dark hover:bg-gray-800 text-white font-bold py-3 px-6 rounded-lg transition flex items-center">
+                        <i class="fab fa-google-play text-2xl mr-3"></i>
+                        <div class="text-left">
+                            <div class="text-xs">GET IT ON</div>
+                            <div class="text-xl">Google Play</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- تذييل الصفحة -->
+    <footer class="bg-dark text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-mosque text-2xl text-secondary"></i>
+                        <span class="text-xl font-bold">IslamicLife.ai</span>
+                    </div>
+                    <p class="opacity-80 mb-4">
+                        منصة ذكية لتنظيم الحياة الإسلامية اليومية باستخدام الذكاء الاصطناعي.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-white hover:text-secondary text-xl">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-secondary text-xl">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-secondary text-xl">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-secondary text-xl">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4 text-secondary">روابط سريعة</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-secondary transition">الرئيسية</a></li>
+                        <li><a href="#" class="hover:text-secondary transition">الميزات</a></li>
+                        <li><a href="#" class="hover:text-secondary transition">عن الموقع</a></li>
+                        <li><a href="#" class="hover:text-secondary transition">المدونة</a></li>
+                        <li><a href="#" class="hover:text-secondary transition">التسعير</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4 text-secondary">الميزات</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-secondary transition">المخطط اليومي</a></li>
+                        <li><a href="#" class="hover:text-secondary transition">المساعد الصوتي</a></li>
+                        <li><a href="#" class="hover:text-secondary transition">الحاسبات الذكية</a></li>
+                        <li><a href="#" class="hover:text-secondary transition">الدعم النفسي</a></li>
+                        <li><a href="#" class="hover:text-secondary transition">التقارير</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4 text-secondary">اتصل بنا</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-2 text-secondary"></i>
+                            <span>الرياض، المملكة العربية السعودية</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-2 text-secondary"></i>
+                            <span>info@islamiclife.ai</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt mt-1 mr-2 text-secondary"></i>
+                            <span>+966 11 123 4567</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 pt-8 text-center opacity-75">
+                <p>© 2023 IslamicLife.ai. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- زر الطفو -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <button class="floating-btn bg-secondary text-dark w-14 h-14 rounded-full shadow-lg flex items-center justify-center text-xl">
+            <i class="fas fa-microphone"></i>
+        </button>
+    </div>
+
+    <script>
+        // كود JavaScript لتحويل النص إلى كلام (TTS)
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                const speech = new SpeechSynthesisUtterance(text);
+                speech.lang = 'ar-SA';
+                speech.rate = 0.9;
+                speech.pitch = 1;
+                window.speechSynthesis.speak(speech);
+            } else {
+                alert('عذرًا، متحدث النص غير مدعوم في متصفحك');
+            }
+        }
+        
+        // كود لتحديث أوقات الصلاة
+        function updatePrayerTimes() {
+            const times = {
+                'الفجر': '4:25 ص',
+                'الشروق': '5:45 ص',
+                'الظهر': '12:15 م',
+                'العصر': '3:45 م',
+                'المغرب': '6:30 م',
+                'العشاء': '8:00 م'
+            };
+            
+            const now = new Date();
+            const currentHour = now.getHours();
+            const currentMinute = now.getMinutes();
+            
+            let nextPrayer = 'العشاء';
+            let nextPrayerTime = '8:00 م';
+            
+            // تحديد الصلاة التالية
+            if (currentHour < 4 || (currentHour === 4 && currentMinute < 25)) {
+                nextPrayer = 'الفجر';
+                nextPrayerTime = '4:25 ص';
+            } else if (currentHour < 12 || (currentHour === 12 && currentMinute < 15)) {
+                nextPrayer = 'الظهر';
+                nextPrayerTime = '12:15 م';
+            } else if (currentHour < 15 || (currentHour === 15 && currentMinute < 45)) {
+                nextPrayer = 'العصر';
+                nextPrayerTime = '3:45 م';
+            } else if (currentHour < 18 || (currentHour === 18 && currentMinute < 30)) {
+                nextPrayer = 'المغرب';
+                nextPrayerTime = '6:30 م';
+            }
+            
+            // تحديث واجهة المستخدم
+            document.querySelector('.prayer-times-title').innerText = `الصلاة القادمة: ${nextPrayer}`;
+            document.querySelector('.prayer-times-countdown').innerText = nextPrayerTime;
+        }
+        
+        // تحديث أوقات الصلاة عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            updatePrayerTimes();
+            
+            // تحديث كل دقيقة
+            setInterval(updatePrayerTimes, 60000);
+            
+            // تفعيل المساعد الصوتي
+            document.querySelector('.floating-btn').addEventListener('click', function() {
+                speakText('مرحبًا، كيف يمكنني مساعدتك اليوم؟');
+            });
+        });
+    </script>
+</body>
+</html>
